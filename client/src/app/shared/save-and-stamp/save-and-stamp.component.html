@@ -1,0 +1,8 @@
+<mat-dialog-content>
+  <h4>Sind alle Angaben korrekt?</h4>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Abbrechen</button>
+  <button mat-button [mat-dialog-close]="true" cdkFocusInitial (click)="saveAndLoad()">Speichern und laden</button>
+</mat-dialog-actions>
+

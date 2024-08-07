@@ -1,0 +1,21 @@
+<form id="pdfForm" class="form" *ngIf="pdfSrc === '', else pdfPreview">
+  <input type="file" id="pdfUpload" accept=".pdf" class="form-control" required (change)="onFileSelected($event)" />
+  <button type="submit" class="btn btn-primary mx-2 text-light" (click)="uploadFile($event)">Upload</button>
+</form>
+<ng-template #pdfPreview>
+  <div class="btn-group pb-2">
+    <button class="btn btn-outline-info" (click)="zoomFile()">zoom</button>
+    <button class="btn btn-outline-success" (click)="newPDF()">Neues PDF laden</button>
+  </div>
+
+  <pdf-viewer [src]="pdfSrc"
+              [render-text]="true"
+              [original-size]="false"
+              [zoom]="currentZoom"
+              class="viewer"
+              [class.zoomIn]="currentZoom === 1"
+              [class.zoomOut]="currentZoom !== 1"
+
+  ></pdf-viewer>
+</ng-template>
+

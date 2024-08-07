@@ -1,0 +1,9 @@
+@echo off
+cd server
+echo Starting NestJS server...
+start /min cmd /c "nest start dev"
+cd ..
+echo Returning to parent directory...
+cd client
+echo Starting Angular development server...
+start /min ng serve -o

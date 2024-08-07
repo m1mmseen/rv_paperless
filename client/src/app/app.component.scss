@@ -1,0 +1,16 @@
+:host {
+  display: grid;
+  grid-template-rows: 5svh 90svh;
+}
+.content {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  column-gap: 3rem;
+
+  * {
+    padding: 1rem;
+  }
+  :last-child {
+    border-left: 1px solid lightgrey;
+  }
+}

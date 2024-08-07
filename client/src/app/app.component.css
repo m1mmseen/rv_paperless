@@ -1,0 +1,18 @@
+:host {
+  display: grid;
+  grid-template-rows: 5svh 90svh;
+}
+
+.content {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  column-gap: 3rem;
+}
+.content * {
+  padding: 1rem;
+}
+.content :last-child {
+  border-left: 1px solid lightgrey;
+}
+
+/*# sourceMappingURL=app.component.css.map */

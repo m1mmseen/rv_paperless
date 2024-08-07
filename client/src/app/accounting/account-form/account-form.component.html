@@ -1,0 +1,87 @@
+
+<form [formGroup]="accountingForm">
+
+  <div class="row mb-4">
+    <div class="col">
+      <label class="form-label">Vergütungsreferenz</label>
+      <input type="text" placeholder="(optional)" class="form-control" formControlName="compensationReference">
+    </div>
+    <div class="col with-helper">
+      <label class="form-label">Zahlungsdatum</label>
+      <input type="date" class="form-control" formControlName="payDate">
+    </div>
+  </div>
+  <div class="row mb-4">
+    <div class="col">
+      <label class="form-label">Dateiname</label>
+      <input type="text" class="form-control" formControlName="filename" placeholder="default: worldline_{Zahlungsdatum}">
+    </div>
+  </div>
+
+
+  <ng-container formArrayName="accountings">
+    <ng-container *ngFor="let accounting of getAccountings(); let i = index">
+
+        <div class="form-group" [formGroupName]="i" [id]="i">
+          <div class="invoice">
+            <input type="text" class="form-control" formControlName="invoice" placeholder="RE.-Nr.">
+          </div>
+          <div class="soll">
+            <input type="text" class="form-control" formControlName="soll" placeholder="Soll">
+          </div>
+          <div class="haben">
+            <input type="text" class="form-control" formControlName="haben" placeholder="Haben">
+          </div>
+
+          <div class="amount">
+            <input type="text" class="form-control" formControlName="amount" placeholder="Betrag">
+          </div>
+
+          <div class="tax">
+            <input type="text" class="form-control" formControlName="tax" placeholder="MwSt.">
+          </div>
+          <div class="delete">
+            <button (click)="deleteAccounting(i)" class="btn btn-danger">löschen</button>
+          </div>
+        </div>
+
+    </ng-container>
+  </ng-container>
+  <button class="btn btn-secondary my-3 d-flex" (click)="addAccounting()">
+    <mat-icon class="me-2">
+      create
+    </mat-icon>
+    Neue Kontierung
+  </button>
+
+
+</form>
+
+<div *ngIf="getAccountings().length > 0">
+  <h3 class="mt-5">Vorschau Kontierung</h3>
+  <div class="accounting-preview" id="accounting-preview" (click)="toPng('Kontierungsstempel')">
+    <table class="table border border-1">
+      <thead>
+      <tr>
+        <th scope="col">RE.-Nr.</th>
+        <th scope="col">Soll</th>
+        <th scope="col">Haben</th>
+        <th scope="col">Betrag</th>
+        <th scope="col">MwSt.</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let accountingItem of getAccountings()">
+        <td>{{accountingItem.value['invoice']}}</td>
+        <td>{{accountingItem.value['soll']}}</td>
+        <td>{{accountingItem.value['haben']}}</td>
+        <td>{{accountingItem.value['amount']}}</td>
+        <td>{{accountingItem.value['tax']}}</td>
+      </tr>
+    </table>
+  </div>
+  <button class="btn btn-success my-2" type="submit" (click)="toPng('Kontierungsstempel')">Stempeln und runterladen</button>
+</div>
+
+<div id="loadPNG"></div>
+
